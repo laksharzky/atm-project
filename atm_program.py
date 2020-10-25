@@ -25,31 +25,52 @@ while True:
         print('4. Ganti Pin')
         print('5. Keluar')
 
-        user = int(input('Menu: '))
+
+
+        user = int(input('Silahkan Pilih Opsi: '))
 
         if user == 1:
-            print(cust1.infoBalance())
+            print("saldo anda sekarang: " + str(cust1.infoBalance()))
         elif user == 2:
-            nominal = int(input('Jumlah: '))
-            if nominal < int(cust1.infoBalance()):
-                print('Saldo Anda: ' + str(cust1.withdrawBalance(nominal)))
+            nominal = float(input('Masukkan nominal: '))
+            verify_withdraw = input('Anda akan melakukan debet dengan nominal berikut ? y/n ' + str(nominal) + " ")
+            if verify_withdraw == "y":
+                print('Saldo awal anda adalah: Rp ' + str(cust1.infoBalance()))
+            else:
+                break
+            if nominal < cust1.infoBalance():
+                cust1.withdrawBalance(nominal)
+                print('Tranksaksi anda berhasil dilakukan')
+                print('Saldo anda sekarang: Rp ' + str(cust1.infoBalance()))
+            else:
+                print('Maaf saldo anda tidak mencukupi')
         elif user == 3:
-            nominal = int(input('Masukkan Jumlah: '))
-            print(cust1.saveDeposit(nominal))
+            nominal = int(input('Masukkan nominal: '))
+            verify_deposit = input('Anda akan melakukan deposit dengan nominal berikut ? y/n ' + str(nominal) + " ")
+            if verify_deposit == "y":
+                 cust1.saveDeposit(nominal)
+                 print('saldo anda sekarang: Rp ' + str(cust1.infoBalance()))
+            else:
+                break
         elif user == 4:
             verifikasi = int(input('Masukkan PIN Anda sekarang: '))
-            if verifikasi == int(cust1.infoPin()):
-                newPin = int(input('Masukkan PIN baru: '))
-                print('Pin Anda berhasil diubah')
+            while verifikasi != int(cust1.infoPin()):
+                print('Maaf PIN anda salah, silahkan masukkan lagi: ')
+            newPin = int(input('Masukkan PIN baru: '))
+            print('Pin Anda berhasil diubah')
+
+            verify_newPin = int(input('Silahkan masukkan PIN baru: '))
+            if verify_newPin == newPin:
+                print('PIN terkonfirmasi')
             else:
                 print('Maaf pin anda salah')
+           
         elif user == 5:
-            resi = random.uniform(100000,1000000)
+            resi = random.randint(100000,1000000)
             print('==================================')
             print('No. Resi : ' + str(resi))
             print('==================================')
-            dateToday = datetime.datetime.now()
-            print(dateToday)
+            print('Tanggal: ',datetime.datetime.now()) 
             print('Sisa saldo Anda: ' + str(cust1.infoBalance()))
             exit()
             

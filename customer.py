@@ -6,6 +6,9 @@ class Customer:
         self.custPin = custPin
         self.custBalance = custBalance
     
+    def checkId(self):
+        return self.id
+
     def infoPin(self):
         return self.custPin
     
@@ -13,11 +16,7 @@ class Customer:
         return self.custBalance
         
     def withdrawBalance(self,nominal):
-        self.nominal = nominal
-        debet = self.custBalance - self.nominal
-        return debet
+        self.custBalance -= nominal
 
     def saveDeposit(self,nominal):
-        self.nominal = nominal
-        simpan = self.custBalance + self.nominal
-        return simpan
+        self.custBalance += nominal
